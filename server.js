@@ -5,6 +5,8 @@ var fs = require('fs');
 var path = require('path');
 var url = require('url');
 var http = require('http');
+var https = require('https');
+var makeRequest_http_or_https = http;
 
 var app = express();
 
@@ -42,6 +44,11 @@ app.get('/debug', function(req, res){
 		}
 	}
   	console.log("requestHeader SERVER"+ JSON.stringify(headers));
+  	if(externalUrl.protocol == "https:")
+  		makeRequest_http_or_https = https;
+  	else
+  		makeRequest_http_or_https = http;
+  	console.log("protocol : " + externalUrl.protocol);
 	var options = {
 	  host: externalUrl.hostname,
 	  port: externalUrl.port,
@@ -80,7 +87,7 @@ function getFile(path, response, mimeType) {
 }
 
 function getDataFromUrl(options, reqData, parentRes){
-	var req = http.request(options, function(res) {
+	var req = makeRequest_http_or_https.request(options, function(res) {
 	  res.setEncoding('utf8');
 	  parentRes.writeHead(res.statusCode , res.headers);
 	  res.on('data', function (chunk) {

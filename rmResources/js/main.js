@@ -45,10 +45,10 @@ window.onload = function(){
 		var li = document.createElement('li');
 		li.setAttribute("style", "margin-top:5px;")
 		var div1 = document.createElement('div');
-		div1.setAttribute("class", "col-sm-4");
-		div1.setAttribute("style","margin-left: 90px;");
+		div1.setAttribute("class", "col-sm-5");
+		//div1.setAttribute("style","margin-left: 0px");
 		var div2 = document.createElement('div');
-		div2.setAttribute("class", "col-sm-4");
+		div2.setAttribute("class", "col-sm-5");
 		var input1 = document.createElement('input');
 		input1.setAttribute("type", "text");
 		input1.setAttribute("name", k);
