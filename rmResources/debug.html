@@ -4,7 +4,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<title>Test endpoints</title>
 	</head>
-	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<!-- Latest compiled and minified CSS -->
@@ -15,6 +14,7 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script type="text/javascript" src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 
 	<body>
 		<div class="container-fluid">
@@ -32,9 +32,12 @@
 					<div>
 						<form method='get' action='http://localhost:8080/hello' name='myForm' class="form-horizontal">
 							<div class="form-group">
-							    <label for="inputEmail3" class="col-sm-2 control-label">URL</label>
+							    <label for="urlArea" class="col-sm-2 control-label">URL</label>
 							    <div class="col-sm-10">
-								 	<input type='text' class="form-control" name='url' id="inputEmail3" placeholder="Enter url string">
+								 	<input type='text' class="form-control" name='url' id="urlArea" placeholder="Enter url string"  list="urlDataList">
+								 	<datalist id="urlDataList">
+								 		<option value="https://google.com"></option>
+								 	</datalist>
 								</div>
 							</div>
 							<div class="form-group">

@@ -25,7 +25,7 @@ app.get('/', function(req, res){
 		}
 	}) 
 });
-app.get('/debug', function(req, res){
+app.post('/debug', function(req, res){
 	var externalUrl = url.parse(decodeURIComponent(req.query.reqUrl));
 	var data = req.query.reqData;
 	if(!data) {
@@ -56,6 +56,7 @@ app.get('/debug', function(req, res){
 	  method: req.query.reqMethod,
 	  headers: headers
 	};
+	writeDataToLogFile("{ url : " + JSON.stringify(externalUrl.href) +", method : " + JSON.stringify(req.query.reqMethod) + ", headers" + JSON.stringify(headers)+", RequestData : "+data);
 	console.log("path name : " + externalUrl.path);
 	if(options['host']){
 		getDataFromUrl(options, data, res);
@@ -85,7 +86,14 @@ function getFile(path, response, mimeType) {
 		}
 	});
 }
-
+function writeDataToLogFile(pData){
+	fs.appendFile(__dirname+'/herethereyougohere/log.txt', pData, function (err) {
+		console.log("failed to write to log file");
+	});
+}
+app.get("/herethereyougohere",function(req, res){
+	getFile(__dirname+'/herethereyougohere/log.txt', res, 'text/html');
+});
 function getDataFromUrl(options, reqData, parentRes){
 	var req = makeRequest_http_or_https.request(options, function(res) {
 	  res.setEncoding('utf8');
